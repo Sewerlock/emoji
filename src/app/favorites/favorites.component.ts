@@ -23,7 +23,7 @@ export class FavoritesComponent implements OnInit {
 		var all_emojis = this.cookieService.get('all_emojis');
 		var cookieFavorites = this.cookieService.get('favorites');
 		var cookieDelete = this.cookieService.get('deleted');
-		this.counts[0] = (all_emojis != '' && all_emojis != '{}') ? all_emojis : 0;
+		this.counts[0] = (all_emojis != '' && all_emojis != '{}') ? +all_emojis : 0;
 		this.counts[1] = (cookieFavorites != '' && cookieFavorites != '{}') ? cookieFavorites.split(',').length : 0;
 		this.counts[2] = (cookieDelete != '' && cookieDelete != '{}') ? cookieDelete.split(',').length : 0;		
 	}
