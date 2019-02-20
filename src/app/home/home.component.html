@@ -1,0 +1,45 @@
+<div class="container">
+	<div class="row">
+		<div class="col s3" id="menu">
+			<a *ngFor="let item of menuItems; let i=index" routerLinkActive="selected" routerLink="{{menuUrls[i]}}">{{item}} ({{counts[i]}})</a>
+		</div>
+		<div class="col s9 emojiwrapper" *ngIf="resp">
+				<div class="row center">
+					<div class="col s6 table_title">
+						{{title}}
+					</div>
+					<div class="col s6">
+						<input type="text" id="searchInput" (keyup)="searchEmoji()" placeholder="Поиск..." />
+					</div>					
+				</div>
+				<div class="row">
+					<div class="col s2 center">
+						Имя
+					</div>
+					<div class="col s7 center">
+						Ссылка
+					</div>
+					<div class="col s1 center">
+						Превью
+					</div>
+					<div class="col s2 center">
+						Действия
+					</div>					
+				</div>
+				<div id="table">
+					<ng-container *ngFor="let item of resp">
+						<div class="row" #row *ngIf="!deleted.hasOwnProperty(item[0])">
+							<div class="col s2"><div class="ico_name" title="{{item[0]}}">{{item[0]}}</div></div>
+							<div class="col s7"><a class="underline emoji_link" href="{{item[1]}}" target="_blank">{{item[1]}}</a></div>
+							<div class="col s1 center"><img class="emoji tooltipped" [class.favorite_emoji]="favorites.hasOwnProperty(item[0])" width="25" src="{{item[1]}}" [attr.data-tooltip]="'<img src='+item[1]+' alt=>'" alt="{{item[0]}}" /></div>
+							<div class="col s2 center">
+								<i href="#" title='Добавить в "Любимые"' [class.favorite_active]="favorites.hasOwnProperty(item[0])" (click)="favoriteEmoji(item[0], item[1])" class="material-icons star">star</i> &nbsp; 
+								<i href="#" title='Удалить' (click)="deleteEmoji(item[0], item[1])" class="material-icons delete">delete_forever</i>					
+							</div>
+						</div>
+					</ng-container>
+				</div>
+		</div>
+	</div>
+</div>
+<div id="toup"  class="btn"><i class="material-icons" style="font-size: 32px;">keyboard_arrow_up</i></div>
